@@ -22,8 +22,26 @@ client.connect(err => {
   console.log('Connection successfully')
  
 
-  
+  app.post('/addGrocery', (req, res) => {
+ 
+    const newData = req.body;
+    console.log("new data: ", newData);
+    assignmentCollection.insertOne(newData)
+    .then(result => {
+      console.log('inserted count', result.insertedCount)
+      res.send(result.insertedCount > 0)
+    })
 
+  })
+
+
+  app.get('/products', (req, res) => {
+    assignmentCollection.find()
+    .toArray((err, products) => {
+      console.log("from database", products)
+      res.send(products)
+    })
+  })
 
 
 });
@@ -36,13 +54,3 @@ app.listen(process.env.PORT || 7070, () => {
   console.log("http://localhost:7070")
 })
 
-
-// app.post('/addEvent', (req, res) => {
-//   const newEvent = req.body;
-//   console.log('adding new body', newEvent);
-//   assignmentCollection.insertOne(newEvent)
-//   .then(result => {
-//     console.log('inserted Count', result.insertedCount)
-//     res.send(result.insertedCount > 0)
-//   })
-// })
