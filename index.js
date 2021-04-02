@@ -59,7 +59,7 @@ client.connect(err => {
 });
 
 app.get('/', (req, res) => {
-  res.send('Hello Word!')
+  res.send('This is assignment ten!')
 })
 
 app.listen(process.env.PORT || 7070, () => {
